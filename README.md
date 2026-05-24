@@ -10,6 +10,14 @@ adapter — the data, sorting, filtering, grouping, pagination, and selection
 logic of TanStack Table v8, rendered through your Compose UI on Android and
 iOS from a single shared source set.
 
+## Demo
+
+<p align="center">
+  <img src="docs/media/sample-android.gif" alt="tanstack-table-kmp sample running on Android: sorting, filtering, pagination, grouping, row selection" width="270">
+</p>
+
+<p align="center"><sub>The <code>:sample</code> app on Android, 2× playback speed. <a href="docs/media/sample-android.mp4">Full-quality MP4 →</a> &nbsp;·&nbsp; iOS recording coming soon (same Compose Multiplatform code).</sub></p>
+
 ```kotlin
 val table = rememberTable(
     TableOptions(
