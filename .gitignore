@@ -38,3 +38,6 @@ gradle.properties.local
 # Test output
 test-results/
 test-output/
+
+# Claude Code local-only settings (not for the repo)
+.claude/settings.local.json
