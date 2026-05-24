@@ -31,7 +31,7 @@ Prerequisites:
 Clone and build:
 
 ```bash
-git clone https://github.com/OWNER/tanstack-table-kmp.git
+git clone https://github.com/praveenshharma/tanstack-table-kmp.git
 cd tanstack-table-kmp
 ./gradlew build
 ```

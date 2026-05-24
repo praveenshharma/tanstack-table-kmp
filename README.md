@@ -79,7 +79,7 @@ Compose Multiplatform 1.7.x. Kotlin 2.x. Android `minSdk` 24, `compileSdk` 34.
 
 ## Install
 
-> The artifacts are published to Maven Central as `io.github.<your-org>:…`.
+> The artifacts are published to Maven Central as `io.github.praveenshharma:…`.
 > Coordinates will be finalised at the first release tag.
 
 ```kotlin
@@ -94,8 +94,8 @@ dependencyResolutionManagement {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.<your-org>:tanstack-table-core:0.1.0")
-            implementation("io.github.<your-org>:tanstack-table-compose:0.1.0")
+            implementation("io.github.praveenshharma:tanstack-table-core:0.1.0")
+            implementation("io.github.praveenshharma:tanstack-table-compose:0.1.0")
         }
     }
 }

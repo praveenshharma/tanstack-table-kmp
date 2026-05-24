@@ -45,11 +45,11 @@ Either:
 
 - Write to `~/.gradle/gradle.properties` (recommended for local publishing):
   ```properties
-  POM_GROUP_ID=io.github.<your-handle>
+  POM_GROUP_ID=io.github.praveenshharma
   POM_ARTIFACT_VERSION=0.1.0
-  POM_URL=https://github.com/<owner>/tanstack-table-kmp
-  POM_SCM_URL=https://github.com/<owner>/tanstack-table-kmp
-  POM_DEVELOPER_ID=<your-handle>
+  POM_URL=https://github.com/praveenshharma/tanstack-table-kmp
+  POM_SCM_URL=https://github.com/praveenshharma/tanstack-table-kmp
+  POM_DEVELOPER_ID=praveenshharma
   POM_DEVELOPER_NAME=<Your Name>
   POM_DEVELOPER_EMAIL=<you@example.com>
 

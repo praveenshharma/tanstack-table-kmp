@@ -30,5 +30,5 @@ Initial public release.
   implementation invariants, the `@NonRestartableComposable` rationale for
   Compose cell composables).
 
-[Unreleased]: https://github.com/OWNER/tanstack-table-kmp/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/OWNER/tanstack-table-kmp/releases/tag/v0.1.0
+[Unreleased]: https://github.com/praveenshharma/tanstack-table-kmp/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/praveenshharma/tanstack-table-kmp/releases/tag/v0.1.0
