@@ -1,0 +1,40 @@
+# Gradle
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+local.properties
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.iws
+out/
+.kotlin/
+
+# Kotlin/Native
+.konan/
+
+# Xcode / iOS
+xcuserdata/
+*.xcuserstate
+*.xcworkspace/xcuserdata/
+DerivedData/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs and artifacts
+*.log
+*.hprof
+captures/
+
+# Local secrets (Maven Central publishing)
+secrets/
+*.gpg
+*.asc
+gradle.properties.local
+
+# Test output
+test-results/
+test-output/

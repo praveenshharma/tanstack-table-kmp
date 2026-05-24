@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a new feature or API addition
+title: "[Feature] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Note: `:table-core` mirrors TanStack Table v8. Engine features that
+        don't exist upstream will be considered case-by-case; the bar is
+        higher than for `:table-compose` adapter features, which are
+        original to this project.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem does this solve?
+      placeholder: Describe the use case, not the proposed solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed API
+      description: A sketch of what the public API would look like.
+      render: kotlin
+  - type: dropdown
+    id: module
+    attributes:
+      label: Affected module
+      options:
+        - ":table-core (engine)"
+        - ":table-compose (adapter)"
+        - "both"
+        - "tooling / docs"
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered

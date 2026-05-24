@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a bug or unexpected behavior
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug. Please fill in as much
+        detail as you can — the smaller the reproducer, the faster we can
+        confirm and fix.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: A clear description of the unexpected behavior.
+      placeholder: When I call `table.setColumnOrder(...)`, the rendered grid still shows the original order.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      placeholder: The grid should reflect the new column order on the next recomposition.
+    validations:
+      required: true
+  - type: textarea
+    id: reproducer
+    attributes:
+      label: Reproducer
+      description: |
+        The smallest snippet that demonstrates the issue. A link to a Gradle
+        module is ideal; a Compose snippet is fine for layout / rendering bugs.
+      render: kotlin
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Library version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: Target platform
+      multiple: true
+      options:
+        - Android
+        - iOS (simulator)
+        - iOS (device)
+        - JVM
+    validations:
+      required: true
+  - type: input
+    id: compose
+    attributes:
+      label: Compose Multiplatform version
+      placeholder: "1.7.3"
+  - type: input
+    id: kotlin
+    attributes:
+      label: Kotlin version
+      placeholder: "2.1.0"
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / stack trace
+      render: shell

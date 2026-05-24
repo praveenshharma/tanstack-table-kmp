@@ -1,0 +1,16 @@
+tanstack-table-kmp
+Copyright (c) 2026 tanstack-table-kmp contributors
+
+This product includes a Kotlin Multiplatform port of TanStack Table v8
+(https://github.com/TanStack/table), originally developed by Tanner Linsley
+and the TanStack Table contributors, distributed under the MIT License.
+
+  Copyright (c) 2020-present Tanner Linsley
+
+The engine semantics, public type names, and feature behavior in `:table-core`
+mirror the upstream TanStack Table API. The `:table-compose` module is a
+Compose Multiplatform adapter authored for this project and has no direct
+counterpart in upstream TanStack Table.
+
+This project is community-maintained and is not affiliated with, endorsed by,
+or sponsored by TanStack or Tanner Linsley.
