@@ -1,0 +1,68 @@
+name: Release
+
+# Publishes :table-core and :table-compose to Maven Central when a v* tag is pushed.
+# The version is taken from the tag (v0.1.0 -> 0.1.0). Non-secret POM metadata is
+# passed as -P flags; credentials + GPG key come from repository secrets.
+#
+# Required repository secrets (Settings -> Secrets and variables -> Actions):
+#   MAVEN_CENTRAL_USERNAME    Sonatype Central Portal user-token username
+#   MAVEN_CENTRAL_PASSWORD    Sonatype Central Portal user-token password
+#   SIGNING_KEY               Armored GPG private key:  gpg --armor --export-secret-keys <KEYID>
+#   SIGNING_KEY_ID            Last 8 hex chars of the key id (e.g. D9A46DB2)
+#   SIGNING_KEY_PASSWORD      GPG key passphrase (empty string if the key has none)
+#
+# By default this STAGES the deployment (publishToMavenCentral) and leaves it
+# pending manual release in the portal — matching automaticRelease=false in the
+# build scripts. To fully automate (tag push -> live on Central with no manual
+# step), change the gradle task to publishAndReleaseToMavenCentral.
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (without leading v), e.g. 0.1.1'
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Publish to Maven Central
+    runs-on: macos-latest  # macOS so the Kotlin/Native iOS targets build
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v6
+
+      - name: Resolve version from tag or input
+        id: ver
+        run: |
+          if [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Stage to Maven Central
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_KEY_ID }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        run: |
+          ./gradlew --no-daemon --no-configuration-cache publishToMavenCentral \
+            -Pttkmp.groupId=io.github.praveenshharma \
+            -Pttkmp.version=${{ steps.ver.outputs.version }} \
+            -Pttkmp.url=https://github.com/praveenshharma/tanstack-table-kmp \
+            -Pttkmp.scmUrl=https://github.com/praveenshharma/tanstack-table-kmp \
+            -Pttkmp.developerId=praveenshharma \
+            -Pttkmp.developerName="Praveen Sharma" \
+            -Pttkmp.developerEmail=praveenshharma@gmail.com
