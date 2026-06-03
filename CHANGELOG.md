@@ -8,7 +8,9 @@ All notable changes to this project are documented here. Format follows
 
 ## [0.1.0] — 2026-05-24
 
-Initial public release.
+Initial public release. Published to Maven Central on 2026-06-03 as
+`io.github.praveenshharma:table-core:0.1.0` and
+`io.github.praveenshharma:table-compose:0.1.0`.
 
 ### Added
 - `:table-core` — Kotlin Multiplatform headless table engine. Mirrors the

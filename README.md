@@ -1,5 +1,6 @@
 # tanstack-table-kmp
 
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.praveenshharma/table-core.svg?label=Maven%20Central)](https://central.sonatype.com/artifact/io.github.praveenshharma/table-core)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Kotlin](https://img.shields.io/badge/kotlin-2.x-7F52FF.svg?logo=kotlin)](https://kotlinlang.org)
 [![Compose Multiplatform](https://img.shields.io/badge/compose--multiplatform-1.7.x-4285F4.svg)](https://www.jetbrains.com/lp/compose-multiplatform/)
@@ -89,8 +90,8 @@ Compose Multiplatform 1.7.x. Kotlin 2.x. Android `minSdk` 24, `compileSdk` 34.
 
 ## Install
 
-> The artifacts are published to Maven Central as `io.github.praveenshharma:…`.
-> Coordinates will be finalised at the first release tag.
+Available on Maven Central. Add `mavenCentral()` to your repositories, then the
+dependencies to your shared module:
 
 ```kotlin
 // settings.gradle.kts
@@ -104,8 +105,12 @@ dependencyResolutionManagement {
 kotlin {
     sourceSets {
         commonMain.dependencies {
-            implementation("io.github.praveenshharma:tanstack-table-core:0.1.0")
-            implementation("io.github.praveenshharma:tanstack-table-compose:0.1.0")
+            // The Compose Multiplatform adapter. Pulls in table-core transitively
+            // (it api-depends on the engine), so this one line is enough for most apps.
+            implementation("io.github.praveenshharma:table-compose:0.1.0")
+
+            // Or depend on just the headless engine — no Compose, no UI:
+            // implementation("io.github.praveenshharma:table-core:0.1.0")
         }
     }
 }
