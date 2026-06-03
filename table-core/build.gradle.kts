@@ -46,11 +46,11 @@ android {
     }
 }
 
-// Maven Central publishing. Dormant until POM_GROUP_ID and POM_ARTIFACT_VERSION
+// Maven Central publishing. Dormant until ttkmp.groupId and ttkmp.version
 // are provided (see docs/PUBLISHING.md). The plugin still applies — it just
 // won't have anywhere to push to without group / version / credentials.
-val pomGroupId = providers.gradleProperty("POM_GROUP_ID").orNull
-val pomVersion = providers.gradleProperty("POM_ARTIFACT_VERSION").orNull
+val pomGroupId = providers.gradleProperty("ttkmp.groupId").orNull
+val pomVersion = providers.gradleProperty("ttkmp.version").orNull
 if (pomGroupId != null && pomVersion != null) {
     group = pomGroupId
     version = pomVersion
@@ -65,7 +65,7 @@ if (pomGroupId != null && pomVersion != null) {
                 "Kotlin Multiplatform port of TanStack Table v8 — headless table engine.",
             )
             inceptionYear.set("2026")
-            url.set(providers.gradleProperty("POM_URL").get())
+            url.set(providers.gradleProperty("ttkmp.url").get())
             licenses {
                 license {
                     name.set("MIT License")
@@ -75,13 +75,13 @@ if (pomGroupId != null && pomVersion != null) {
             }
             developers {
                 developer {
-                    id.set(providers.gradleProperty("POM_DEVELOPER_ID").get())
-                    name.set(providers.gradleProperty("POM_DEVELOPER_NAME").get())
-                    email.set(providers.gradleProperty("POM_DEVELOPER_EMAIL").orNull)
+                    id.set(providers.gradleProperty("ttkmp.developerId").get())
+                    name.set(providers.gradleProperty("ttkmp.developerName").get())
+                    email.set(providers.gradleProperty("ttkmp.developerEmail").orNull)
                 }
             }
             scm {
-                val scmUrl = providers.gradleProperty("POM_SCM_URL").get()
+                val scmUrl = providers.gradleProperty("ttkmp.scmUrl").get()
                 url.set(scmUrl)
                 connection.set("scm:git:$scmUrl.git")
                 developerConnection.set("scm:git:$scmUrl.git")

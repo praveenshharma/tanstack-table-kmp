@@ -20,7 +20,7 @@ Sign up at [central.sonatype.com](https://central.sonatype.com/) and either:
 - Use the auto-verified `io.github.<your-github-handle>` namespace (simpler;
   no DNS).
 
-The chosen value becomes `POM_GROUP_ID` below.
+The chosen value becomes `ttkmp.groupId` below.
 
 ### 2. Generate a GPG signing key
 
@@ -45,13 +45,13 @@ Either:
 
 - Write to `~/.gradle/gradle.properties` (recommended for local publishing):
   ```properties
-  POM_GROUP_ID=io.github.praveenshharma
-  POM_ARTIFACT_VERSION=0.1.0
-  POM_URL=https://github.com/praveenshharma/tanstack-table-kmp
-  POM_SCM_URL=https://github.com/praveenshharma/tanstack-table-kmp
-  POM_DEVELOPER_ID=praveenshharma
-  POM_DEVELOPER_NAME=<Your Name>
-  POM_DEVELOPER_EMAIL=<you@example.com>
+  ttkmp.groupId=io.github.praveenshharma
+  ttkmp.version=0.1.0
+  ttkmp.url=https://github.com/praveenshharma/tanstack-table-kmp
+  ttkmp.scmUrl=https://github.com/praveenshharma/tanstack-table-kmp
+  ttkmp.developerId=praveenshharma
+  ttkmp.developerName=<Your Name>
+  ttkmp.developerEmail=<you@example.com>
 
   mavenCentralUsername=<sonatype-user-token-username>
   mavenCentralPassword=<sonatype-user-token-password>
