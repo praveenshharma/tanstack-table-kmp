@@ -1,0 +1,47 @@
+name: Docs
+
+on:
+  push:
+    branches: [main]
+  # Allow a manual rebuild from the Actions tab if needed.
+  workflow_dispatch:
+
+# Single in-flight Pages deployment; queued runs cancel any in-progress one.
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+# The deploy-pages action needs `pages: write` + `id-token: write`.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build Dokka HTML
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v6
+      - name: Generate Dokka multi-module HTML
+        run: ./gradlew --no-daemon dokkaHtmlMultiModule
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: build/dokka/htmlMultiModule
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5
