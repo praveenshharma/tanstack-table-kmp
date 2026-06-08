@@ -243,9 +243,31 @@ state-update path end-to-end.
 
 ### Verifying on iOS
 
-Open `iosApp/iosApp.xcodeproj` in Xcode and run on the iOS Simulator. The
-same screen set is available. For a quick command-line check that the iOS
-target still compiles:
+The `iosApp/` host is a standard Compose Multiplatform iOS app: a SwiftUI
+entry point (`iOSApp.swift`) wrapping the shared Compose UI through a
+`UIViewControllerRepresentable` (`ContentView.swift`), with a pre-build phase
+that runs the Kotlin Multiplatform `embedAndSignAppleFrameworkForXcode` task to
+build, embed, and sign `SampleApp.framework`.
+
+Open `iosApp/iosApp.xcodeproj` in Xcode, pick the `iosApp` scheme and a
+simulator, and Run. Or from the command line, build + install + launch on a
+booted simulator:
+
+```bash
+xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp \
+  -sdk iphonesimulator -destination 'id=<BOOTED_SIM_UDID>' \
+  -configuration Debug -derivedDataPath iosApp/build/dd build
+xcrun simctl install booted iosApp/build/dd/Build/Products/Debug-iphonesimulator/iosApp.app
+xcrun simctl launch booted io.github.tanstacktable.sample
+```
+
+The Xcode project is generated from `iosApp/project.yml` via
+[xcodegen](https://github.com/yonaskolb/XcodeGen) (`cd iosApp && xcodegen
+generate`); both the spec and the generated `.xcodeproj` are committed, so the
+project opens in Xcode with no extra tooling — regenerate only after editing
+`project.yml`.
+
+For a quick command-line check that just the iOS *targets compile* (no app):
 
 ```bash
 ./gradlew :table-core:compileKotlinIosSimulatorArm64

@@ -1,0 +1,59 @@
+# xcodegen spec for the iOS sample host.
+#
+# This is the source of truth for `iosApp.xcodeproj` (which is also committed so
+# the project opens in Xcode without any extra tooling). After editing this file,
+# regenerate with:  cd iosApp && xcodegen generate
+#
+# The app is a thin SwiftUI shell around the shared Compose UI: a pre-build phase
+# runs the Kotlin Multiplatform `embedAndSignAppleFrameworkForXcode` task, which
+# builds + embeds + signs SampleApp.framework for whatever SDK/arch Xcode is
+# targeting; the app then links it and mounts MainViewControllerKt.MainViewController().
+
+name: iosApp
+options:
+  bundleIdPrefix: io.github.tanstacktable
+  deploymentTarget:
+    iOS: "14.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    TARGETED_DEVICE_FAMILY: "1,2"
+
+targets:
+  iosApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: iosApp
+    info:
+      path: iosApp/Info.plist
+      properties:
+        CFBundleDisplayName: TanStack Table
+        CFBundleShortVersionString: "1.0"
+        CFBundleVersion: "1"
+        UILaunchScreen: {}
+        # Required by Compose Multiplatform's iOS runtime (PlistSanityCheck throws
+        # on launch without it); enables 120 Hz rendering on ProMotion devices.
+        CADisableMinimumFrameDurationOnPhone: true
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: io.github.tanstacktable.sample
+        # SampleApp.framework is produced here by embedAndSignAppleFrameworkForXcode.
+        FRAMEWORK_SEARCH_PATHS:
+          - $(inherited)
+          - $(SRCROOT)/../sample/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        # The framework-embed phase runs Gradle, which writes outside Xcode's
+        # script sandbox — disable sandboxing so the phase can run.
+        ENABLE_USER_SCRIPT_SANDBOXING: "NO"
+    preBuildScripts:
+      - name: "Build Kotlin framework (embedAndSign)"
+        basedOnDependencyAnalysis: false
+        script: |
+          cd "$SRCROOT/.."
+          ./gradlew :sample:embedAndSignAppleFrameworkForXcode
