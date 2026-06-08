@@ -71,7 +71,19 @@ you take only what you need.
 | `:table-core`   | `commonMain` (JVM 11, Android, `iosX64`, `iosArm64`, `iosSimulatorArm64`) |
 | `:table-compose`| `commonMain` (JVM, Android, all three iOS targets)     |
 
-Compose Multiplatform 1.7.x. Kotlin 2.x. Android `minSdk` 24, `compileSdk` 34.
+Compose Multiplatform 1.7.x. Kotlin 2.x. Android `minSdk` 24, `compileSdk` 35.
+
+### Version compatibility
+
+0.1.0 is built with **Kotlin 2.1.0** and **Compose Multiplatform 1.7.3**.
+
+- **Android / JVM** consumers: tolerant of differing Kotlin versions (JVM
+  bytecode is stable), so most setups just work.
+- **iOS / Kotlin Native** consumers: the published `.klib`s are tied to the
+  Kotlin compiler version. For the iOS targets, keep your project's Kotlin
+  version aligned with **2.1.x** — a significantly different Kotlin version can
+  fail to link against the native artifacts. This is a general Kotlin
+  Multiplatform constraint, not specific to this library.
 
 ## Modules
 
