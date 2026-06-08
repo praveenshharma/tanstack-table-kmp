@@ -16,10 +16,12 @@ iOS from a single shared source set.
 ## Demo
 
 <p align="center">
-  <img src="docs/media/sample-android.gif" alt="tanstack-table-kmp sample running on Android: sorting, filtering, pagination, grouping, row selection" width="270">
+  <img src="docs/media/sample-android.gif" alt="tanstack-table-kmp sample on Android: sorting, filtering, pagination, grouping, row selection" width="270">
+  &nbsp;&nbsp;
+  <img src="docs/media/sample-ios.gif" alt="tanstack-table-kmp sample on iOS, from the same Compose Multiplatform code" width="270">
 </p>
 
-<p align="center"><sub>The <code>:sample</code> app on Android, 2× playback speed. <a href="docs/media/sample-android.mp4">Full-quality MP4 →</a> &nbsp;·&nbsp; iOS recording coming soon (same Compose Multiplatform code).</sub></p>
+<p align="center"><sub>The same <code>:sample</code> Compose Multiplatform code on Android (left) and iOS (right), 2× playback speed. Full-quality MP4: <a href="docs/media/sample-android.mp4">Android</a> · <a href="docs/media/sample-ios.mp4">iOS</a>.</sub></p>
 
 ```kotlin
 val table = rememberTable(
